@@ -34,6 +34,7 @@
             border: none;
             background-color: #333;
             color: white;
+            margin-top: 5px;
         }
         .game-section {
             margin-top: 20px;
@@ -52,6 +53,7 @@
 <body>
     <div class="container">
         <h2>Chat Log</h2>
+        <input type="text" id="username" class="input-box" placeholder="Enter your name">
         <div class="chatbox" id="chatbox"></div>
         <input type="text" id="message" class="input-box" placeholder="Type a message..." onkeypress="sendMessage(event)">
         
@@ -67,12 +69,13 @@
     <script>
         function sendMessage(event) {
             if (event.key === 'Enter') {
+                let usernameInput = document.getElementById('username');
                 let messageBox = document.getElementById('chatbox');
                 let messageInput = document.getElementById('message');
                 
-                if (messageInput.value.trim() !== "") {
+                if (messageInput.value.trim() !== "" && usernameInput.value.trim() !== "") {
                     let message = document.createElement('div');
-                    message.textContent = messageInput.value;
+                    message.innerHTML = `<strong>${usernameInput.value}:</strong> ${messageInput.value}`;
                     messageBox.appendChild(message);
                     messageInput.value = "";
                     messageBox.scrollTop = messageBox.scrollHeight;
